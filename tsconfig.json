@@ -1,0 +1,32 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+			"skipLibCheck": true,
+			"declaration": true,
+			"lib": [
+					"es2017",
+					"dom"
+			],
+			"sourceMap": true,
+			"listEmittedFiles": true,
+			"listFiles": false,
+			"module": "commonjs",
+			"moduleResolution": "node",
+			"baseUrl": "src",
+			"rootDir": "src",
+			"rootDirs": [
+					"src"
+			],
+			"removeComments": true,
+			"strictNullChecks": true,
+			"target": "es2017",
+			"outDir": "lib"
+	},
+	"include": [
+			"src"
+	],
+	"exclude": [
+			"node_modules",
+			"lib"
+	]
+}
