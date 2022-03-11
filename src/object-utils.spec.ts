@@ -162,6 +162,29 @@ describe('ObjectUtils', () => {
 
       expect(ObjectUtils.get(testObj, 'items.1.id')).toBe(3);
     });
+
+    it('works with a value of false', () => {
+      const testObj: TestObj = {
+        id: 1,
+        name: 'My Test',
+        secret: 'hello',
+        meta: {
+          name: 'something',
+          date: {
+            string: '2022-04-01',
+          },
+          keywords: ['testing', 'bacon'],
+        },
+        items: [
+          { id: 2 },
+          { id: 3 },
+          { id: 5 },
+        ],
+        active: false,
+      };
+
+      expect(ObjectUtils.get(testObj, 'active')).toBe(false);
+    });
   });
 
   describe('filter', () => {
@@ -205,7 +228,8 @@ interface TestObj {
     },
     keywords: string[]
   },
-  items?: TestItemObj[]
+  items?: TestItemObj[],
+  active?: boolean
 }
 
 interface TestItemObj {
