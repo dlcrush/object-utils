@@ -21,6 +21,26 @@ class ObjectUtils {
     return valid ? returnValue : defaultValue;
   }
 
+  static set<T, V, RV>(obj: T, path: string, value: V): RV;
+  static set<T, V, RV>(obj: T, path: string[], value: V): RV;
+  static set<T, V, RV>(obj: T, path: string | string[], value: V): RV {
+    const pathArr = Array.isArray(path) ? path : path.split('.');
+    const returnVal = obj || {} as RV;
+    let currentProp = returnVal as unknown as object;
+
+    for (let i = 0; i < pathArr.length - 1; i += 1) {
+      if (typeof currentProp[pathArr[i]] === 'undefined' || currentProp[pathArr[i]] === null) {
+        currentProp[pathArr[i]] = {};
+      }
+
+      currentProp = currentProp[pathArr[i]];
+    }
+
+    currentProp[pathArr[pathArr.length - 1]] = value;
+
+    return returnVal as RV;
+  }
+
   static filter<T, R>(obj: T, props: string[]): R {
     return Object.keys(obj).reduce((result: R, key: string) => {
       const returnVal = result;

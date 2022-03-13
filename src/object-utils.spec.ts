@@ -187,6 +187,36 @@ describe('ObjectUtils', () => {
     });
   });
 
+  describe('set', () => {
+    it('sets a value on an object', () => {
+      const testObj = {};
+
+      ObjectUtils.set(testObj, 'myPath', 24);
+      expect(testObj).toStrictEqual({ myPath: 24 });
+    });
+
+    it('sets a value on an object with nested path', () => {
+      const testObj = {};
+
+      ObjectUtils.set(testObj, 'hello.world.test', 'hi');
+      expect(testObj).toStrictEqual({ hello: { world: { test: 'hi' } } });
+    });
+
+    it('sets a value on an object with an existing value', () => {
+      const testObj = { meta: { keywords: ['test', 'bacon'] } };
+
+      ObjectUtils.set(testObj, 'meta.keywords', ['lettuce', 'tomato']);
+      expect(testObj).toStrictEqual({ meta: { keywords: ['lettuce', 'tomato'] } });
+    });
+
+    it('returns the new object', () => {
+      const testObj = { meta: { test: 'hello' } };
+
+      const result = ObjectUtils.set(testObj, 'meta.test', 'bacon');
+      expect(result).toStrictEqual({ meta: { test: 'bacon' } });
+    });
+  });
+
   describe('filter', () => {
     it('filters an object down to the specified properties', () => {
       const testObj: TestObj = {
