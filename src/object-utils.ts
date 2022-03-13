@@ -64,6 +64,10 @@ class ObjectUtils {
       return returnVal;
     }, {} as R);
   }
+
+  static merge<T>(...args: T[]): T {
+    return args.reduce((prev: T, curr: T) => Object.assign(prev, curr), {} as T);
+  }
 }
 
 export default ObjectUtils;

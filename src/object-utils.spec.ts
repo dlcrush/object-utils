@@ -244,6 +244,25 @@ describe('ObjectUtils', () => {
       expect(result).toEqual({ id: 1, name: 'My Test' });
     });
   });
+
+  describe('merge', () => {
+    it('shallow merges two objects', () => {
+      const test1 = { hello: 'hi', secret: 'tomato' };
+      const test2 = { hello: 'hey' };
+
+      const result = ObjectUtils.merge(test1, test2);
+      expect(result).toStrictEqual({ hello: 'hey', secret: 'tomato' });
+    });
+
+    it('shallow merges multiple objects', () => {
+      const test1 = { hello: 'hi', secret: 'tomato' };
+      const test2 = { secret: 'bacon' };
+      const test3 = { secret: 'lettuce' };
+
+      const result = ObjectUtils.merge(test1, test2, test3);
+      expect(result).toStrictEqual({ hello: 'hi', secret: 'lettuce' });
+    });
+  });
 });
 
 interface TestObj {
